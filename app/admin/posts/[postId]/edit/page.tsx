@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { PostForm } from "@/components/admin/posts/post-form";
 import { Card } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { toast } from "sonner";
 import { PostWithAuthor } from "@/types/post";
 
-export default function EditPostPage({
-  params,
-}: {
-  params: { postId: string };
-}) {
-  const router = useRouter();
+interface PageProps {
+  params: {
+    postId: string;
+  };
+}
+
+export default function EditPostPage({ params }: PageProps) {
   const [post, setPost] = useState<PostWithAuthor | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
