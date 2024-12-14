@@ -34,17 +34,17 @@ export default function AdminPostsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
+          {posts?.map((post) => (
             <AdminPostCard
-              key={post.id}
+              key={post?.id}
               post={post}
-              onDelete={() => deletePost(post.id)}
-              onEdit={() => router.push(`/admin/posts/${post.id}/edit`)}
+              onDelete={() => deletePost(post?.id)}
+              onEdit={() => router.push(`/admin/posts/${post?.id}/edit`)}
             />
           ))}
         </div>
 
-        {posts.length === 0 && (
+        {posts?.length === 0 && (
           <div className="text-center py-12">
             <p className="text-muted-foreground">No posts found</p>
           </div>

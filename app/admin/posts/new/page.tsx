@@ -69,7 +69,6 @@ export default function NewPostPage() {
       authorId: "",
     },
   });
-  const [imageLoading, setImageLoading] = useState<boolean>(false);
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -109,16 +108,12 @@ export default function NewPostPage() {
   ) => {
     // console.log(event.target.files);
     if (!event.target.files) return;
-    setImageLoading(true);
     const saveImageTofireBase: any = await imageSaveToFirebaseHandler(
       event.target.files[0]
     );
 
     if (saveImageTofireBase !== "") {
-      setImageLoading(false);
       form.setValue("image", saveImageTofireBase);
-      // setFormData({ ...formData, image: saveImageTofireBase });
-      // save image url to form data
     }
   };
   async function onSubmit(values: z.infer<typeof formSchema>) {

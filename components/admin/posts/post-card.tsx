@@ -27,16 +27,16 @@ export function AdminPostCard({ post, onEdit, onDelete }: AdminPostCardProps) {
     <Card className="overflow-hidden">
       <div className="relative h-48">
         <Image
-          src={post.image}
-          alt={post.title}
+          src={post?.image}
+          alt={post?.title}
           fill
           className="object-cover"
         />
       </div>
       <div className="p-6">
-        <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+        <h2 className="text-xl font-semibold mb-2">{post?.title}</h2>
         <p className="text-sm text-muted-foreground mb-4">
-          {formatDate(post.createdAt)}
+          {formatDate(post?.createdAt)}
         </p>
 
         <div className="flex space-x-2">

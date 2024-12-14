@@ -15,7 +15,7 @@ export default function EditPostPage({ params }: EditPostPageProps) {
   useEffect(() => {
     async function fetchPost() {
       try {
-        const response = await fetch(`/api/posts/${params.postId}`);
+        const response = await fetch(`/api/posts/${params?.postId}`);
         if (!response.ok) {
           throw new Error("Failed to load post");
         }
@@ -59,7 +59,7 @@ export default function EditPostPage({ params }: EditPostPageProps) {
               description: post.description,
               content: post.content,
               image: post.image,
-              authorId: post.authorId,
+              authorId: post.authorId || "1",
             }}
             postId={post.id}
           />
