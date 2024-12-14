@@ -18,7 +18,12 @@ async function getPost(slug: string) {
     notFound();
   }
 
-  return post;
+  return {
+    ...post,
+    author: {
+      name: post.author?.name || "Anonymous",
+    },
+  };
 }
 
 async function getLatestPosts(currentSlug: string) {
