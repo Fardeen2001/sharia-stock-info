@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Post } from "@prisma/client";
 import { PostForm } from "@/components/admin/posts/post-form";
 import { Card } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { toast } from "sonner";
+import { PostWithAuthor } from "@/types/post";
 
 export default function EditPostPage({
   params,
@@ -14,20 +14,26 @@ export default function EditPostPage({
   params: { postId: string };
 }) {
   const router = useRouter();
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<PostWithAuthor | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/posts/${params.postId}`)
-      .then((res) => res.json())
-      .then((data) => {
+    async function fetchPost() {
+      try {
+        const response = await fetch(`/api/posts/${params.postId}`);
+        if (!response.ok) {
+          throw new Error("Failed to load post");
+        }
+        const data = await response.json();
         setPost(data);
-        setIsLoading(false);
-      })
-      .catch(() => {
+      } catch (error) {
         toast.error("Failed to load post");
+      } finally {
         setIsLoading(false);
-      });
+      }
+    }
+
+    fetchPost();
   }, [params.postId]);
 
   if (isLoading) {

@@ -1,50 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Post } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { AdminPostCard } from "@/components/admin/posts/post-card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Plus } from "lucide-react";
-import { toast } from "sonner";
+import { usePosts } from "@/hooks/use-posts";
 
 export default function AdminPostsPage() {
   const router = useRouter();
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch posts on component mount
-  useState(() => {
-    fetch("/api/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        toast.error("Failed to load posts");
-        setIsLoading(false);
-      });
-  });
-
-  const handleDelete = async (postId: string) => {
-    try {
-      const response = await fetch(`/api/posts/${postId}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete post");
-      }
-
-      setPosts(posts.filter((post) => post.id !== postId));
-      toast.success("Post deleted successfully");
-    } catch (error) {
-      toast.error("Failed to delete post");
-    }
-  };
+  const { posts, isLoading, deletePost } = usePosts();
 
   if (isLoading) {
     return (
@@ -72,7 +38,7 @@ export default function AdminPostsPage() {
             <AdminPostCard
               key={post.id}
               post={post}
-              onDelete={() => handleDelete(post.id)}
+              onDelete={() => deletePost(post.id)}
               onEdit={() => router.push(`/admin/posts/${post.id}/edit`)}
             />
           ))}

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Post } from "@prisma/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,9 +14,10 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Edit, Trash } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { PostWithAuthor } from "@/types/post";
 
 interface AdminPostCardProps {
-  post: Post;
+  post: PostWithAuthor;
   onEdit: () => void;
   onDelete: () => void;
 }

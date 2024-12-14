@@ -69,13 +69,13 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Connect</h4>
             <div className="flex space-x-4">
               <Link
-                href="https://twitter.com"
+                href="https://x.com/fardeenahamed5"
                 className="text-muted-foreground hover:text-primary"
               >
                 <Twitter className="h-5 w-5" />
               </Link>
               <Link
-                href="https://github.com"
+                href="https://github.com/Fardeen2001"
                 className="text-muted-foreground hover:text-primary"
               >
                 <Github className="h-5 w-5" />

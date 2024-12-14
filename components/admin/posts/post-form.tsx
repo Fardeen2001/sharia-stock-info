@@ -19,7 +19,7 @@ import { toast } from "sonner";
 import { PostFormValues, postSchema } from "@/lib/validations/post";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
+import "react-quill/dist/quill.snow.css";
 interface PostFormProps {
   initialData?: PostFormValues;
   postId?: string;
@@ -84,7 +84,7 @@ export function PostForm({ initialData, postId }: PostFormProps) {
             </FormItem>
           )}
         />
-        
+
         <FormField
           control={form.control}
           name="slug"
@@ -98,7 +98,7 @@ export function PostForm({ initialData, postId }: PostFormProps) {
             </FormItem>
           )}
         />
-        
+
         <FormField
           control={form.control}
           name="description"
@@ -112,7 +112,7 @@ export function PostForm({ initialData, postId }: PostFormProps) {
             </FormItem>
           )}
         />
-        
+
         <FormField
           control={form.control}
           name="image"
@@ -126,7 +126,7 @@ export function PostForm({ initialData, postId }: PostFormProps) {
             </FormItem>
           )}
         />
-        
+
         <FormField
           control={form.control}
           name="content"
@@ -144,7 +144,7 @@ export function PostForm({ initialData, postId }: PostFormProps) {
             </FormItem>
           )}
         />
-        
+
         <Button type="submit" disabled={isLoading}>
           {postId ? "Update" : "Create"} Post
         </Button>
