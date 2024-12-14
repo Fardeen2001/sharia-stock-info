@@ -6,14 +6,9 @@ import { Card } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { toast } from "sonner";
 import { PostWithAuthor } from "@/types/post";
+import { EditPostPageProps } from "@/types/page-props";
 
-interface PageProps {
-  params: {
-    postId: string;
-  };
-}
-
-export default function EditPostPage({ params }: PageProps) {
+export default function EditPostPage({ params }: EditPostPageProps) {
   const [post, setPost] = useState<PostWithAuthor | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
