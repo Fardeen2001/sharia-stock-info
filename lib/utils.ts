@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
+import { FIREBASE_API_KEY } from "./config";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -17,7 +18,7 @@ export function slugify(str: string) {
     .replace(/(^-|-$)+/g, "");
 }
 export const firebaseConfig = {
-  apiKey: "AIzaSyAbQqwfACvIbFLFLbFoFLuPVZFzhcCghc4",
+  apiKey: FIREBASE_API_KEY,
   authDomain: "sharia-stock-info.firebaseapp.com",
   projectId: "sharia-stock-info",
   storageBucket: "sharia-stock-info.appspot.com",

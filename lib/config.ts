@@ -1,5 +1,6 @@
 export const ALPHA_VANTAGE_API_KEY =
   process.env.ALPHA_VANTAGE_API_KEY || "demo";
+export const FIREBASE_API_KEY = process.env.FIREBASE || "";
 
 // List of pre-screened halal stocks
 export const HALAL_STOCKS = [
