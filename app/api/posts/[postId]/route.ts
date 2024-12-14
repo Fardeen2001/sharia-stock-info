@@ -1,7 +1,34 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/db";
-import { postSchema } from "@/lib/validations/post";
+
+export async function GET(
+  req: Request,
+  { params }: { params: { postId: string } }
+) {
+  try {
+    const post = await prisma.post.findUnique({
+      where: {
+        id: params.postId,
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!post) {
+      return new NextResponse("Post not found", { status: 404 });
+    }
+
+    return NextResponse.json(post);
+  } catch (error) {
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
 
 export async function PATCH(
   req: Request,
@@ -14,18 +41,16 @@ export async function PATCH(
     }
 
     const json = await req.json();
-    const body = postSchema.parse(json);
-
     const post = await prisma.post.update({
       where: {
         id: params.postId,
       },
       data: {
-        title: body.title,
-        slug: body.slug,
-        description: body.description,
-        content: body.content,
-        image: body.image,
+        title: json.title,
+        slug: json.slug,
+        description: json.description,
+        content: json.content,
+        image: json.image,
       },
     });
 

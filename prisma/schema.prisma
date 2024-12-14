@@ -25,7 +25,7 @@ model Post {
   description String    @db.Text
   content     String    @db.Text
   image       String
-  published   Boolean   @default(false)
+  published   Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   author      User      @relation(fields: [authorId], references: [id])

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,23 +16,48 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
-
+import { initializeApp } from "firebase/app";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import { firebaseConfig } from "@/lib/utils";
 const formSchema = z.object({
   title: z.string().min(1),
   slug: z.string().min(1),
   description: z.string().min(1),
   image: z.string().url(),
   content: z.string().min(1),
+  authorId: z.string().min(1),
 });
-
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app, `gs://sharia-stock-info.appspot.com`);
+const createUniqueFileName = (fileName: string) => {
+  const timestame = Date.now();
+  const randomString = Math.random().toString(36).substring(2, 12);
+  return `${fileName}-${timestame}-${randomString}`;
+};
+interface User {
+  id: string;
+  name: string;
+}
 export default function NewPostPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
+  const [users, setUsers] = useState<User[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,9 +66,61 @@ export default function NewPostPage() {
       description: "",
       image: "",
       content: "",
+      authorId: "",
     },
   });
+  const [imageLoading, setImageLoading] = useState<boolean>(false);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("/api/users");
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        toast.error("Failed to load authors");
+      }
+    };
 
+    fetchUsers();
+  }, []);
+  const imageSaveToFirebaseHandler = async (file: any) => {
+    const extractUniqueFileName = createUniqueFileName(file?.name);
+    const storageRef = ref(storage, `blog/${extractUniqueFileName}`);
+    const uploadImage = uploadBytesResumable(storageRef, file);
+    return new Promise((resolve, reject) =>
+      uploadImage.on(
+        "state_changed",
+        (snapshot) => {},
+        (error) => reject(error),
+        () => {
+          getDownloadURL(uploadImage.snapshot.ref)
+            .then((url) => resolve(url))
+            .catch((error) => reject(error));
+        }
+      )
+    );
+  };
+  const blogImageChangeHandler = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    // console.log(event.target.files);
+    if (!event.target.files) return;
+    setImageLoading(true);
+    const saveImageTofireBase: any = await imageSaveToFirebaseHandler(
+      event.target.files[0]
+    );
+
+    if (saveImageTofireBase !== "") {
+      setImageLoading(false);
+      form.setValue("image", saveImageTofireBase);
+      // setFormData({ ...formData, image: saveImageTofireBase });
+      // save image url to form data
+    }
+  };
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true);
@@ -110,7 +187,7 @@ export default function NewPostPage() {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Meta Description</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -124,10 +201,21 @@ export default function NewPostPage() {
                 name="image"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Image URL</FormLabel>
+                    <FormLabel>Image</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input
+                        type="file"
+                        name="image"
+                        accept="image/**"
+                        max={1000000}
+                        onChange={blogImageChangeHandler}
+                      />
                     </FormControl>
+                    {field.value && (
+                      <p className="text-sm text-green-600">
+                        Image uploaded successfully
+                      </p>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -151,6 +239,33 @@ export default function NewPostPage() {
                 )}
               />
 
+              <FormField
+                control={form.control}
+                name="authorId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Author</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select an author" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {users.map((user) => (
+                          <SelectItem key={user.id} value={user.id}>
+                            {user.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <Button type="submit" disabled={isLoading}>
                 Create Post
               </Button>

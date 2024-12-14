@@ -5,16 +5,15 @@ import { LatestPosts } from "@/components/blog/latest-posts";
 
 async function getPost(slug: string) {
   const post = await prisma.post.findUnique({
-    where: { slug },
+    where: { slug: slug },
     include: {
       author: {
         select: {
-          name: true
-        }
-      }
-    }
+          name: true,
+        },
+      },
+    },
   });
-
   if (!post) {
     notFound();
   }
@@ -26,26 +25,26 @@ async function getLatestPosts(currentSlug: string) {
   return await prisma.post.findMany({
     where: {
       slug: {
-        not: currentSlug
-      }
+        not: currentSlug,
+      },
     },
     take: 3,
     orderBy: {
-      createdAt: "desc"
+      createdAt: "desc",
     },
     select: {
       title: true,
       slug: true,
       image: true,
-      createdAt: true
-    }
+      createdAt: true,
+    },
   });
 }
 
 export default async function BlogPostPage({
-  params
+  params,
 }: {
-  params: { slug: string }
+  params: { slug: string };
 }) {
   const post = await getPost(params.slug);
   const latestPosts = await getLatestPosts(params.slug);

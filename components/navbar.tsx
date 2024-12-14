@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ScrollText, LineChart, Home, Info } from "lucide-react";
+import Image from "next/image";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -37,15 +38,29 @@ export function Navbar() {
 
   return (
     <nav className="border-b bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[80vw] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold">
+            <Link
+              href="/"
+              className="text-xl font-bold flex items-center gap-2"
+            >
+              <Image
+                alt="Sharia-logo"
+                className="rounded object-cover"
+                height="50"
+                src="/logo.png"
+                style={{
+                  aspectRatio: "50/40",
+                  objectFit: "cover",
+                }}
+                width="50"
+              />
               Sharia Stock Info
             </Link>
           </div>
 
-          <div className="hidden md:block">
+          <div>
             <div className="flex items-center space-x-4">
               {routes.map((route) => (
                 <Link

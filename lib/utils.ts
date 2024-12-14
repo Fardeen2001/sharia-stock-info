@@ -16,3 +16,12 @@ export function slugify(str: string) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
 }
+export const firebaseConfig = {
+  apiKey: "AIzaSyAbQqwfACvIbFLFLbFoFLuPVZFzhcCghc4",
+  authDomain: "sharia-stock-info.firebaseapp.com",
+  projectId: "sharia-stock-info",
+  storageBucket: "sharia-stock-info.appspot.com",
+  messagingSenderId: "782591385251",
+  appId: "1:782591385251:web:cffc2b248444d74ca72916",
+  measurementId: "G-L8GNGRHBB0",
+};

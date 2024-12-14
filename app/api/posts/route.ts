@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
     const json = await req.json();
     const body = postSchema.parse(json);
-
+    console.log(body.authorId);
     const post = await prisma.post.create({
       data: {
         title: body.title,
@@ -20,12 +20,13 @@ export async function POST(req: Request) {
         description: body.description,
         content: body.content,
         image: body.image,
-        authorId: session.user.id,
+        authorId: body.authorId,
       },
     });
-
+    console.log(post);
     return NextResponse.json(post);
   } catch (error) {
+    console.log(error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
