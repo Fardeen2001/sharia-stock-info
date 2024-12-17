@@ -61,7 +61,6 @@
     "react-day-picker": "^9.4.3",
     "react-dom": "18.3.1",
     "react-hook-form": "^7.54.1",
-    "react-html-parser": "^2.0.2",
     "react-quill": "^2.0.0",
     "react-resizable-panels": "^2.1.7",
     "recharts": "^2.15.0",
@@ -76,7 +75,6 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "22.10.2",
     "@types/react": "19.0.1",
-    "@types/react-html-parser": "^2.0.6",
     "prisma": "^6.0.1",
     "typescript": "5.7.2"
   }
