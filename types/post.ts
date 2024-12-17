@@ -4,7 +4,7 @@ export interface PostWithAuthor extends Post {
   author: Pick<User, "name">;
 }
 
-export interface PostFormData {
+export interface PostFormValues {
   title: string;
   slug: string;
   description: string;

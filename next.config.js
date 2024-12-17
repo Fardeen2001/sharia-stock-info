@@ -12,8 +12,6 @@ const nextConfig = {
   },
   // Enable React strict mode for improved error handling
   reactStrictMode: true,
-  // Use SWC for minification (faster than Terser)
-  swcMinify: true,
 };
 
 module.exports = nextConfig;

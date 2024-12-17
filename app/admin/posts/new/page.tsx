@@ -250,9 +250,9 @@ export default function NewPostPage() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {users.map((user) => (
-                          <SelectItem key={user.id} value={user.id}>
-                            {user.name}
+                        {users?.map((user) => (
+                          <SelectItem key={user?.id} value={user?.id}>
+                            {user?.name}
                           </SelectItem>
                         ))}
                       </SelectContent>

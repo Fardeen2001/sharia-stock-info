@@ -4,12 +4,13 @@ import { prisma } from "@/lib/db";
 
 export async function GET(
   req: Request,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
+    const { postId } = await params;
     const post = await prisma.post.findUnique({
       where: {
-        id: params.postId,
+        id: postId,
       },
       include: {
         author: {
@@ -32,9 +33,10 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
+    const { postId } = await params;
     const session = await getServerSession();
     if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -43,7 +45,7 @@ export async function PATCH(
     const json = await req.json();
     const post = await prisma.post.update({
       where: {
-        id: params.postId,
+        id: postId,
       },
       data: {
         title: json.title,
@@ -51,6 +53,7 @@ export async function PATCH(
         description: json.description,
         content: json.content,
         image: json.image,
+        authorId: json.authorId,
       },
     });
 
@@ -62,9 +65,11 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
+    const { postId } = await params;
+
     const session = await getServerSession();
     if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -72,7 +77,7 @@ export async function DELETE(
 
     await prisma.post.delete({
       where: {
-        id: params.postId,
+        id: postId,
       },
     });
 

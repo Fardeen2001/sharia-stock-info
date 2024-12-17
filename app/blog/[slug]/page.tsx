@@ -49,10 +49,11 @@ async function getLatestPosts(currentSlug: string) {
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = await getPost(params.slug);
-  const latestPosts = await getLatestPosts(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
+  const latestPosts = await getLatestPosts(slug);
 
   return (
     <div className="py-10">

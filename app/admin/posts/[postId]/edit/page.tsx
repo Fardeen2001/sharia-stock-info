@@ -6,16 +6,19 @@ import { Card } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { toast } from "sonner";
 import { PostWithAuthor } from "@/types/post";
-import { EditPostPageProps } from "@/types/page-props";
 
-export default function EditPostPage({ params }: EditPostPageProps) {
+interface EditPostPageProps {
+  params: Promise<{ postId: string }>;
+}
+
+export default async function EditPostPage({ params }: EditPostPageProps) {
   const [post, setPost] = useState<PostWithAuthor | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const { postId } = await params;
   useEffect(() => {
     async function fetchPost() {
       try {
-        const response = await fetch(`/api/posts/${params?.postId}`);
+        const response = await fetch(`/api/posts/${postId}`);
         if (!response.ok) {
           throw new Error("Failed to load post");
         }
@@ -29,7 +32,7 @@ export default function EditPostPage({ params }: EditPostPageProps) {
     }
 
     fetchPost();
-  }, [params.postId]);
+  }, [postId]);
 
   if (isLoading) {
     return (
@@ -59,7 +62,7 @@ export default function EditPostPage({ params }: EditPostPageProps) {
               description: post.description,
               content: post.content,
               image: post.image,
-              authorId: post.authorId || "1",
+              authorId: post.authorId,
             }}
             postId={post.id}
           />
