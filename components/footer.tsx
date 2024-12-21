@@ -37,14 +37,7 @@ export function Footer() {
                   About
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="https://sharia-stock-info.vercel.app/sitemap.xml"
-                  className="hover:underline"
-                >
-                  Sitemap
-                </Link>
-              </li>
+             
               <li>
                 <Link href="/admin">Admin</Link>
               </li>
