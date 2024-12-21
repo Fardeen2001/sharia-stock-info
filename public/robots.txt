@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow crawling of next.js-specific files
+Disallow: /_next/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://sharia-stock-info.vercel.app/sitemap.xml
+
