@@ -32,7 +32,10 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>,
+});
 import "react-quill/dist/quill.snow.css";
 import { firebaseConfig } from "@/lib/utils";
 const formSchema = z.object({
@@ -223,11 +226,22 @@ export default function NewPostPage() {
                   <FormItem>
                     <FormLabel>Content</FormLabel>
                     <FormControl>
-                      <ReactQuill
-                        theme="snow"
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
+                      <div className="bg-background">
+                        <ReactQuill
+                          theme="snow"
+                          value={field.value}
+                          onChange={field.onChange}
+                          modules={{
+                            toolbar: [
+                              [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                              ["bold", "italic", "underline", "strike"],
+                              [{ list: "ordered" }, { list: "bullet" }],
+                              ["link", "image"],
+                              ["clean"],
+                            ],
+                          }}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

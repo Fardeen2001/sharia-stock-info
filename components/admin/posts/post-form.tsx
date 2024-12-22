@@ -24,7 +24,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>,
+});
 import "react-quill/dist/quill.snow.css";
 interface PostFormProps {
   initialData?: PostFormValues;
@@ -160,11 +163,22 @@ export function PostForm({ initialData, postId }: PostFormProps) {
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
-                <ReactQuill
-                  theme="snow"
-                  value={field.value}
-                  onChange={field.onChange}
-                />
+                <div className="bg-background">
+                  <ReactQuill
+                    theme="snow"
+                    value={field.value}
+                    onChange={field.onChange}
+                    modules={{
+                      toolbar: [
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                        ["bold", "italic", "underline", "strike"],
+                        [{ list: "ordered" }, { list: "bullet" }],
+                        ["link", "image"],
+                        ["clean"],
+                      ],
+                    }}
+                  />
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
