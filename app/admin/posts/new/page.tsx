@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,6 +61,7 @@ export default function NewPostPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -143,7 +144,40 @@ export default function NewPostPage() {
       setIsLoading(false);
     }
   }
-
+  const quillModules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+          ["link", "image", "formula", "video"],
+          [{ align: [] }],
+          [{ color: [] }],
+          [{ font: [] }],
+          ["code-block"],
+          ["clean"],
+        ],
+      },
+    }),
+    []
+  );
+  const quillFormats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "link",
+    "image",
+    "video",
+    "align",
+    "color",
+    "code-block",
+  ];
   return (
     <div className="py-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -227,20 +261,15 @@ export default function NewPostPage() {
                     <FormLabel>Content</FormLabel>
                     <FormControl>
                       <div className="bg-background">
-                        <ReactQuill
-                          theme="snow"
-                          value={field.value}
-                          onChange={field.onChange}
-                          modules={{
-                            toolbar: [
-                              [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                              ["bold", "italic", "underline", "strike"],
-                              [{ list: "ordered" }, { list: "bullet" }],
-                              ["link", "image"],
-                              ["clean"],
-                            ],
-                          }}
-                        />
+                        {
+                          <ReactQuill
+                            id="quill-editor"
+                            value={field.value}
+                            onChange={field.onChange}
+                            modules={quillModules}
+                            formats={quillFormats}
+                          />
+                        }
                       </div>
                     </FormControl>
                     <FormMessage />

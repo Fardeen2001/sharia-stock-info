@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -96,7 +96,40 @@ export function PostForm({ initialData, postId }: PostFormProps) {
       setIsLoading(false);
     }
   }
-
+  const quillModules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+          ["link", "image", "formula", "video"],
+          [{ align: [] }],
+          [{ color: [] }],
+          [{ font: [] }],
+          ["code-block"],
+          ["clean"],
+        ],
+      },
+    }),
+    []
+  );
+  const quillFormats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "link",
+    "image",
+    "video",
+    "align",
+    "color",
+    "code-block",
+  ];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -165,18 +198,11 @@ export function PostForm({ initialData, postId }: PostFormProps) {
               <FormControl>
                 <div className="bg-background">
                   <ReactQuill
-                    theme="snow"
+                    id="quill-editor"
                     value={field.value}
                     onChange={field.onChange}
-                    modules={{
-                      toolbar: [
-                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                        ["bold", "italic", "underline", "strike"],
-                        [{ list: "ordered" }, { list: "bullet" }],
-                        ["link", "image"],
-                        ["clean"],
-                      ],
-                    }}
+                    modules={quillModules}
+                    formats={quillFormats}
                   />
                 </div>
               </FormControl>
