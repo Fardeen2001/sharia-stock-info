@@ -11,6 +11,10 @@ async function getAllBlogPosts() {
       lastModified: new Date(),
     },
     { slug: "best-sharia-compliant-stocks-in-india", lastModified: new Date() },
+    {
+      slug: "exploring-shariah-compliance-of-tata-motors-for-ethical-investing-in-india",
+      lastModified: new Date(),
+    },
   ];
 }
 
