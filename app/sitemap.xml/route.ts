@@ -15,6 +15,10 @@ async function getAllBlogPosts() {
       slug: "exploring-shariah-compliance-of-tata-motors-for-ethical-investing-in-india",
       lastModified: new Date(),
     },
+    {
+      slug: "is-zomato-stock-halal-zomato-halal-investment-guide-india",
+      lastModified: new Date(),
+    },
   ];
 }
 
