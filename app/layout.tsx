@@ -27,7 +27,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="cIn3bzs-1gsJq7MJzmjxin5GSEazzVjxivefiiOycjg"
         />
-        <meta name="google-adsense-account" content="ca-pub-5201783243833750">
+        <meta name="google-adsense-account" content="ca-pub-5201783243833750" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5201783243833750"
      crossorigin="anonymous"></script>
         <link rel="icon" href="/favicon.ico" sizes="any" />
