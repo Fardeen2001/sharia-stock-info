@@ -19,6 +19,10 @@ async function getAllBlogPosts() {
       slug: "is-zomato-stock-halal-zomato-halal-investment-guide-india",
       lastModified: new Date(),
     },
+    {
+      slug: "is-nippon-india-etf-shariah-bees-halal-or-haram",
+      lastModified: new Date(),
+    },
   ];
 }
 
