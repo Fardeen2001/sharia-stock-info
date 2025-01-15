@@ -24,12 +24,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// const ReactQuill = dynamic(() => import("react-quill"), {
-//   ssr: false,
-//   loading: () => <p>Loading editor...</p>,
-// });
-// import "react-quill/dist/quill.snow.css";
-import Editor from "react-simple-wysiwyg";
+const ReactQuill = dynamic(() => import("react-quill-new"), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>,
+});
+import "react-quill-new/dist/quill.snow.css";
+// import Editor from "react-simple-wysiwyg";
 
 interface PostFormProps {
   initialData?: PostFormValues;
@@ -98,40 +98,40 @@ export function PostForm({ initialData, postId }: PostFormProps) {
       setIsLoading(false);
     }
   }
-  // const quillModules = useMemo(
-  //   () => ({
-  //     toolbar: {
-  //       container: [
-  //         [{ header: [1, 2, 3, false] }],
-  //         ["bold", "italic", "underline", "strike", "blockquote"],
-  //         [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-  //         ["link", "image", "formula", "video"],
-  //         [{ align: [] }],
-  //         [{ color: [] }],
-  //         [{ font: [] }],
-  //         ["code-block"],
-  //         ["clean"],
-  //       ],
-  //     },
-  //   }),
-  //   []
-  // );
-  // const quillFormats = [
-  //   "header",
-  //   "bold",
-  //   "italic",
-  //   "underline",
-  //   "strike",
-  //   "blockquote",
-  //   "list",
-  //   "bullet",
-  //   "link",
-  //   "image",
-  //   "video",
-  //   "align",
-  //   "color",
-  //   "code-block",
-  // ];
+  const quillModules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+          ["link", "image", "formula", "video"],
+          [{ align: [] }],
+          [{ color: [] }],
+          [{ font: [] }],
+          ["code-block"],
+          ["clean"],
+        ],
+      },
+    }),
+    []
+  );
+  const quillFormats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "link",
+    "image",
+    "video",
+    "align",
+    "color",
+    "code-block",
+  ];
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -198,19 +198,19 @@ export function PostForm({ initialData, postId }: PostFormProps) {
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
-                <div className="bg-background">
-                  {/* <ReactQuill
+                <div>
+                  <ReactQuill
                     id="quill-editor"
                     value={field.value}
                     onChange={field.onChange}
                     modules={quillModules}
                     formats={quillFormats}
-                  /> */}
-                  <Editor
+                  />
+                  {/* <Editor
                     id="wysiwyg-editor"
                     value={field.value}
                     onChange={field.onChange}
-                  />
+                  /> */}
                 </div>
               </FormControl>
               <FormMessage />

@@ -32,12 +32,12 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-// const ReactQuill = dynamic(() => import("react-quill"), {
-//   ssr: false,
-//   loading: () => <p>Loading editor...</p>,
-// });
-// import "react-quill/dist/quill.snow.css";
-import Editor from "react-simple-wysiwyg";
+const ReactQuill = dynamic(() => import("react-quill-new"), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>,
+});
+import "react-quill-new/dist/quill.snow.css";
+// import Editor from "react-simple-wysiwyg";
 import { firebaseConfig } from "@/lib/utils";
 const formSchema = z.object({
   title: z.string().min(1),
@@ -145,40 +145,40 @@ export default function NewPostPage() {
       setIsLoading(false);
     }
   }
-  // const quillModules = useMemo(
-  //   () => ({
-  //     toolbar: {
-  //       container: [
-  //         [{ header: [1, 2, 3, false] }],
-  //         ["bold", "italic", "underline", "strike", "blockquote"],
-  //         [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-  //         ["link", "image", "formula", "video"],
-  //         [{ align: [] }],
-  //         [{ color: [] }],
-  //         [{ font: [] }],
-  //         ["code-block"],
-  //         ["clean"],
-  //       ],
-  //     },
-  //   }),
-  //   []
-  // );
-  // const quillFormats = [
-  //   "header",
-  //   "bold",
-  //   "italic",
-  //   "underline",
-  //   "strike",
-  //   "blockquote",
-  //   "list",
-  //   "bullet",
-  //   "link",
-  //   "image",
-  //   "video",
-  //   "align",
-  //   "color",
-  //   "code-block",
-  // ];
+  const quillModules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+          ["link", "image", "formula", "video"],
+          [{ align: [] }],
+          [{ color: [] }],
+          [{ font: [] }],
+          ["code-block"],
+          ["clean"],
+        ],
+      },
+    }),
+    []
+  );
+  const quillFormats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "link",
+    "image",
+    "video",
+    "align",
+    "color",
+    "code-block",
+  ];
   return (
     <div className="py-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -261,13 +261,20 @@ export default function NewPostPage() {
                   <FormItem>
                     <FormLabel>Content</FormLabel>
                     <FormControl>
-                      <div className="bg-background">
+                      <div>
                         {
-                          <Editor
-                            id="wysiwyg-editor"
+                          <ReactQuill
+                            id="quill-editor"
                             value={field.value}
                             onChange={field.onChange}
+                            modules={quillModules}
+                            formats={quillFormats}
                           />
+                          // <Editor
+                          //   id="wysiwyg-editor"
+                          //   value={field.value}
+                          //   onChange={field.onChange}
+                          // />
                         }
                       </div>
                     </FormControl>
