@@ -23,6 +23,10 @@ async function getAllBlogPosts() {
       slug: "is-nippon-india-etf-shariah-bees-halal-or-haram",
       lastModified: new Date(),
     },
+    {
+      slug: "is-sun-pharmaceutical-industries-ltd.-halal",
+      lastModified: new Date(),
+    },
   ];
 }
 
