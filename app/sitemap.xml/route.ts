@@ -27,6 +27,10 @@ async function getAllBlogPosts() {
       slug: "is-sun-pharmaceutical-industries-ltd.-halal",
       lastModified: new Date(),
     },
+    {
+      slug: "is-swiggy-stock-halal-and-shariah-compliant",
+      lastModified: new Date(),
+    },
   ];
 }
 
