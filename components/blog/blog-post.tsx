@@ -12,7 +12,7 @@ interface BlogPostProps {
 
 export function BlogPost({ post }: BlogPostProps) {
   return (
-    <article className="space-y-6">
+    <article className="space-y-6 text-black dark:text-white">
       <PostHeader title={post.title} image={post.image} />
       <PostContent
         content={post.content}

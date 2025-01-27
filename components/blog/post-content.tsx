@@ -84,7 +84,7 @@ export function PostContent({ content, author, createdAt }: PostContentProps) {
   }, [content]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-black dark:text-white">
       <div className="flex items-center space-x-4 text-sm text-muted-foreground">
         <p>By {author}</p>
         <span>•</span>
