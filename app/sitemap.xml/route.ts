@@ -35,6 +35,10 @@ async function getAllBlogPosts() {
       slug: "is-ultratech-cement-stock-halal-or-haram",
       lastModified: new Date(),
     },
+    {
+      slug: "is-infosys-ltd-halal-comprehensive-halal-stock-analysis-india",
+      lastModified: new Date(),
+    },
   ];
 }
 
