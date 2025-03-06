@@ -23,15 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGZ62Q6JL1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+       
 
-  gtag('config', 'G-FGZ62Q6JL1');
-</script>
         <meta
           name="google-site-verification"
           content="cIn3bzs-1gsJq7MJzmjxin5GSEazzVjxivefiiOycjg"
@@ -58,6 +51,14 @@ export default function RootLayout({
           href="/apple-touch-icon.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGZ62Q6JL1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FGZ62Q6JL1');
+</script>
       </head>
       <body className={inter.className}>
         <AuthProvider>
