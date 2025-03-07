@@ -39,6 +39,10 @@ async function getAllBlogPosts() {
       slug: "is-infosys-ltd-halal-comprehensive-halal-stock-analysis-india",
       lastModified: new Date(),
     },
+    {
+      slug: "is-hindustan-unilever-ltd-stock-halal",
+      lastModified: new Date(),
+    },
   ];
 }
 
