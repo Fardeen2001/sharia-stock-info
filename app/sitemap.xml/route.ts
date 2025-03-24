@@ -43,6 +43,10 @@ async function getAllBlogPosts() {
       slug: "is-hindustan-unilever-ltd-stock-halal",
       lastModified: new Date(),
     },
+    {
+      slug: "understanding-halal-investment-principles",
+      lastModified: new Date(),
+    },
   ];
 }
 
