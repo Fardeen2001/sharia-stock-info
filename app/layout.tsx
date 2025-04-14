@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthProvider } from "@/components/providers/session-provider";
 import { Toaster } from "@/components/ui/sonner";
-
+import Script from "next/script"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -65,15 +65,18 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         
-  <script id="grocliq_fix" userId="677e2bc20dd7d8bec8fe9427">
-      (async()=>{
-	        const resp =await fetch("https://grocliqfixissues.azurewebsites.net/technicalIssues/generate-dynamic-fix-script?userId=677e2bc20dd7d8bec8fe9427");
-		      const data = await resp?.text();
-	        if(data){ 
-            eval(data)
-	        }
-        })();
-  </script>
+      <Script id="grocliq_fix" strategy="afterInteractive" userId="677e2bc20dd7d8bec8fe9427">
+          {`
+            (async()=>{
+              const userId = "677e2bc20dd7d8bec8fe9427";
+              const resp = await fetch("https://grocliqfixissues.azurewebsites.net/technicalIssues/generate-dynamic-fix-script?userId=" + userId);
+              const data = await resp?.text();
+              if(data){ 
+                eval(data);
+              }
+            })();
+          `}
+        </Script>
 
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
