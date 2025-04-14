@@ -65,7 +65,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         
-      <Script id="grocliq_fix" strategy="afterInteractive" userId="677e2bc20dd7d8bec8fe9427">
+      <Script id="grocliq_fix" strategy="afterInteractive">
           {`
             (async()=>{
               const userId = "677e2bc20dd7d8bec8fe9427";
