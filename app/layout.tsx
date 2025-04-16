@@ -24,7 +24,19 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
        
-
+{/*       <Script id="grocliq_fix" strategy="afterInteractive">
+          {`
+            (async()=>{
+              const userId = "677e2bc20dd7d8bec8fe9427";
+              const resp = await fetch("https://grocliqfixissues.azurewebsites.net/technicalIssues/generate-dynamic-fix-script?userId=" + userId);
+              const data = await resp?.text();
+              if(data){ 
+                eval(data);
+              }
+            })();
+          `}
+        </Script> */}
+        <script async id="grocliq_fix" userId = "677e2bc20dd7d8bec8fe9427"  src="https://grocliqfixissues.azurewebsites.net/technicalIssues/generate-dynamic-fix-script?userId=677e2bc20dd7d8bec8fe9427"></script>
         <meta
           name="google-site-verification"
           content="cIn3bzs-1gsJq7MJzmjxin5GSEazzVjxivefiiOycjg"
@@ -65,7 +77,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         
-      <Script id="grocliq_fix" strategy="afterInteractive">
+{/*       <Script id="grocliq_fix" strategy="afterInteractive">
           {`
             (async()=>{
               const userId = "677e2bc20dd7d8bec8fe9427";
@@ -76,7 +88,7 @@ export default function RootLayout({
               }
             })();
           `}
-        </Script>
+        </Script> */}
 
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
