@@ -36,7 +36,7 @@ export default function RootLayout({
             })();
           `}
         </Script> */}
-        <script async id="grocliq_fix" userId = "677e2bc20dd7d8bec8fe9427"  src="https://grocliqfixissues.azurewebsites.net/technicalIssues/generate-dynamic-fix-script?userId=677e2bc20dd7d8bec8fe9427"></script>
+        <script async id="grocliq_fix" src="https://grocliqfixissues.azurewebsites.net/technicalIssues/generate-dynamic-fix-script?userId=677e2bc20dd7d8bec8fe9427"></script>
         <meta
           name="google-site-verification"
           content="cIn3bzs-1gsJq7MJzmjxin5GSEazzVjxivefiiOycjg"
