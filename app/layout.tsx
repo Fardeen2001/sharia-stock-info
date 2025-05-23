@@ -74,6 +74,8 @@ export default function RootLayout({
             `,
           }}
         />
+
+        <script type="text/javascript" src="data:text/javascript;base64,LyogQWxsaSBBSSB3aWRnZXQgZm9yIHNoYXJpYS1zdG9jay1pbmZvLnZlcmNlbC5hcHAgKi8KKGZ1bmN0aW9uICh3LGQscyxvLGYsanMsZmpzKSB7d1snQWxsaUpTV2lkZ2V0J109bzt3W29dID0gd1tvXSB8fCBmdW5jdGlvbiAoKSB7ICh3W29dLnEgPSB3W29dLnEgfHwgW10pLnB1c2goYXJndW1lbnRzKSB9O2pzID0gZC5jcmVhdGVFbGVtZW50KHMpLCBmanMgPSBkLmdldEVsZW1lbnRzQnlUYWdOYW1lKHMpWzBdO2pzLmlkID0gbzsganMuc3JjID0gZjsganMuYXN5bmMgPSAxOyBmanMucGFyZW50Tm9kZS5pbnNlcnRCZWZvcmUoanMsIGZqcyk7fSh3aW5kb3csIGRvY3VtZW50LCAnc2NyaXB0JywgJ2FsbGknLCAnaHR0cHM6Ly9zdGF0aWMuYWxsaWFpLmNvbS93aWRnZXQvdjEuanMnKSk7YWxsaSgnaW5pdCcsICdzaXRlX25lVFdwQ0J0NUJNb1NYUlEnKTthbGxpKCdvcHRpbWl6ZScsICdhbGwnKTs="/>
       </head>
       <body className={inter.className}>
         
